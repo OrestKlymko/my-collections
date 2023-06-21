@@ -5,7 +5,7 @@ public class MyStack {
 	private int size;
 
 	public MyStack() {
-		stack = new Object[10]; // Початковий розмір масиву стеку
+		stack = new Object[10];
 		top = -1;
 		size = 0;
 	}

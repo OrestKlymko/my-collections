@@ -6,7 +6,7 @@ public class MyQueue {
 	private int size;
 
 	public MyQueue() {
-		queue = new Object[10]; // Початковий розмір масиву черги
+		queue = new Object[10];
 		front = 0;
 		rear = -1;
 		size = 0;
