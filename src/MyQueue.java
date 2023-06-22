@@ -1,18 +1,19 @@
-public class MyQueue {
+public class MyQueue<T> {
 
-	private Object[] queue;
+	private T[] queue;
 	private int front;
 	private int rear;
 	private int size;
 
+
 	public MyQueue() {
-		queue = new Object[10];
+		queue = (T[]) new Object[10];
 		front = 0;
 		rear = -1;
 		size = 0;
 	}
 
-	public void add(Object value) {
+	public void add(T value) {
 		if (size == queue.length) {
 			resizeQueue();
 		}
@@ -23,7 +24,7 @@ public class MyQueue {
 	}
 
 	public void clear() {
-		queue = new Object[10];
+		queue = (T[]) new Object[10];
 		front = 0;
 		rear = -1;
 		size = 0;
@@ -33,7 +34,7 @@ public class MyQueue {
 		return size;
 	}
 
-	public Object peek() {
+	public T peek() {
 		if (size == 0) {
 			return null;
 		}
@@ -41,20 +42,21 @@ public class MyQueue {
 		return queue[front];
 	}
 
-	public Object poll() {
+	public T poll() {
 		if (size == 0) {
 			return null;
 		}
 
-		Object element = queue[front];
+		T element = queue[front];
 		front = (front + 1) % queue.length;
 		size--;
 		return element;
 	}
 
+
 	private void resizeQueue() {
 		int newSize = queue.length * 2;
-		Object[] newQueue = new Object[newSize];
+		T[] newQueue = (T[]) new Object[newSize];
 
 		for (int i = 0; i < size; i++) {
 			newQueue[i] = queue[front];

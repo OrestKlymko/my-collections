@@ -1,11 +1,11 @@
-public class MyLinkedList {
+public class MyLinkedList<T> {
 
-	private Node head;
-	private Node tail;
+	private Node<T> head;
+	private Node<T> tail;
 	private int size;
 
-	public void add(Object value) {
-		Node newNode = new Node(value);
+	public void add(T value) {
+		Node<T> newNode = new Node<>(value);
 
 		if (head == null) {
 			head = newNode;
@@ -24,7 +24,7 @@ public class MyLinkedList {
 			throw new IndexOutOfBoundsException();
 		}
 
-		Node currentNode = getNode(index);
+		Node<T> currentNode = getNode(index);
 
 		if (currentNode.getPrevious() != null) {
 			currentNode.getPrevious().setNext(currentNode.getNext());
@@ -51,51 +51,50 @@ public class MyLinkedList {
 		return size;
 	}
 
-	public Object get(int index) {
+	public T get(int index) {
 		if (index < 0 || index >= size) {
 			throw new IndexOutOfBoundsException();
 		}
 
-		Node currentNode = getNode(index);
+		Node<T> currentNode = getNode(index);
 		return currentNode.getValue();
 	}
 
-	private Node getNode(int index) {
-		Node currentNode = head;
+	private Node<T> getNode(int index) {
+		Node<T> currentNode = head;
 		for (int i = 0; i < index; i++) {
 			currentNode = currentNode.getNext();
 		}
 		return currentNode;
 	}
 
-	private class Node {
-		private Object value;
-		private Node previous;
-		private Node next;
+	private static class Node<T> {
+		private T value;
+		private Node<T> previous;
+		private Node<T> next;
 
-		public Node(Object value) {
+		public Node(T value) {
 			this.value = value;
 		}
 
-		public Object getValue() {
+		public T getValue() {
 			return value;
 		}
 
-		public Node getPrevious() {
+		public Node<T> getPrevious() {
 			return previous;
 		}
 
-		public void setPrevious(Node previous) {
+		public void setPrevious(Node<T> previous) {
 			this.previous = previous;
 		}
 
-		public Node getNext() {
+		public Node<T> getNext() {
 			return next;
 		}
 
-		public void setNext(Node next) {
+		public void setNext(Node<T> next) {
 			this.next = next;
 		}
 	}
 }
-

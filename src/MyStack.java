@@ -1,16 +1,17 @@
-public class MyStack {
+public class MyStack<T> {
 
-	private Object[] stack;
+	private T[] stack;
 	private int top;
 	private int size;
 
+
 	public MyStack() {
-		stack = new Object[10];
+		stack = (T[]) new Object[10];
 		top = -1;
 		size = 0;
 	}
 
-	public void push(Object value) {
+	public void push(T value) {
 		if (size == stack.length) {
 			resizeStack();
 		}
@@ -36,7 +37,7 @@ public class MyStack {
 	}
 
 	public void clear() {
-		stack = new Object[10];
+		stack = (T[]) new Object[10];
 		top = -1;
 		size = 0;
 	}
@@ -45,7 +46,7 @@ public class MyStack {
 		return size;
 	}
 
-	public Object peek() {
+	public T peek() {
 		if (size == 0) {
 			return null;
 		}
@@ -53,21 +54,22 @@ public class MyStack {
 		return stack[top];
 	}
 
-	public Object pop() {
+	public T pop() {
 		if (size == 0) {
 			return null;
 		}
 
-		Object element = stack[top];
+		T element = stack[top];
 		stack[top] = null;
 		top--;
 		size--;
 		return element;
 	}
 
+
 	private void resizeStack() {
 		int newSize = stack.length * 2;
-		Object[] newStack = new Object[newSize];
+		T[] newStack = (T[]) new Object[newSize];
 		System.arraycopy(stack, 0, newStack, 0, size);
 		stack = newStack;
 	}

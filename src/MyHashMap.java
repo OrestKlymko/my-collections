@@ -1,11 +1,11 @@
-public class MyHashMap {
+public class MyHashMap<K, V> {
 
-	private static class Node {
-		Object key;
-		Object value;
-		Node next;
+	private static class Node<K, V> {
+		K key;
+		V value;
+		Node<K, V> next;
 
-		public Node(Object key, Object value) {
+		public Node(K key, V value) {
 			this.key = key;
 			this.value = value;
 			this.next = null;
@@ -13,7 +13,7 @@ public class MyHashMap {
 	}
 
 	private static final int DEFAULT_CAPACITY = 16;
-	private Node[] buckets;
+	private Node<K, V>[] buckets;
 	private int size;
 
 	public MyHashMap() {
@@ -25,14 +25,14 @@ public class MyHashMap {
 		this.size = 0;
 	}
 
-	public void put(Object key, Object value) {
+	public void put(K key, V value) {
 		int index = getIndex(key);
-		Node newNode = new Node(key, value);
+		Node<K, V> newNode = new Node<>(key, value);
 
 		if (buckets[index] == null) {
 			buckets[index] = newNode;
 		} else {
-			Node current = buckets[index];
+			Node<K, V> current = buckets[index];
 			while (current.next != null) {
 				if (current.key.equals(key)) {
 					current.value = value;
@@ -50,15 +50,15 @@ public class MyHashMap {
 		size++;
 	}
 
-	public void remove(Object key) {
+	public void remove(K key) {
 		int index = getIndex(key);
 
 		if (buckets[index] == null) {
 			return;
 		}
 
-		Node prev = null;
-		Node current = buckets[index];
+		Node<K, V> prev = null;
+		Node<K, V> current = buckets[index];
 
 		while (current != null) {
 			if (current.key.equals(key)) {
@@ -86,9 +86,9 @@ public class MyHashMap {
 		return size;
 	}
 
-	public Object get(Object key) {
+	public V get(K key) {
 		int index = getIndex(key);
-		Node current = buckets[index];
+		Node<K, V> current = buckets[index];
 
 		while (current != null) {
 			if (current.key.equals(key)) {
@@ -100,7 +100,7 @@ public class MyHashMap {
 		return null;
 	}
 
-	private int getIndex(Object key) {
+	private int getIndex(K key) {
 		if (key == null) {
 			return 0;
 		}
